@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Inscription {% endblock %}
+{% block style %} <link href="css/form.css" rel="stylesheet"> {% endblock %}
+{% block contenu %} 
+   {% if form.valide is defined %}
+       {% if form.valide == true %}
+           <h1>{{form.message}}</h1>
+       {% else %}   
+        <form class="form" action="index.php?page=inscription" method="post" enctype="application/x-www-form-urlencoded">
+            <h1 align="center"> S'inscrire</h1>
+            <label for="email" class="sr-only">Email:</label>
+            <input type="email" id="inputEmail" name="email" class="form-control"  placeholder="Email" required autofocus>
+            <label for="mdp" class="sr-only">Mot de passe:</label>
+            <input type="password" id="mdp" name="mdp"class="form-control" placeholder="Mot de passe" required>
+            <label for="mdp2" class="sr-only">Mot de passe:</label>
+            <input type="password" id="mdp2" name="mdp2"class="form-control" placeholder="Confirmez le mot de passe" required>
+            <label for="pseudo" class="sr-only">Pseudo:</label>
+            <input type="text" id="pseudo" name="pseudo" class="form-control" placeholder="Pseudo" required autofocus>
+            <select class="form-control"  name="role">
+                <option value="1">Administrateur</option>
+                <option value="2">Client</option>
+            </select>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="btInscrire">S'inscrire</button>
+        </form>
+        {% endif %}
+    {% endif %}
+{% endblock %} 

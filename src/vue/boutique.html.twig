@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Boutique {% endblock %}
+{% block contenu %} 
+    <h1 align="center"> Boutique</h1>
+    {% for j in liste %}
+    <div class="container col col-lg-2">
+        <div class="row"> 
+            <div class="block span3">
+                <div class="product">
+                    <img src="images/jeux/{{j.nom}}">
+                </div>
+                <div class="info">
+                    <h4>{{j.designation}}</h4>
+                    <span class="description">
+                    {{j.description}}
+                    </span>
+                    <span class="price">Genre: {{j.libelle}}</span>
+                    <span class="description">{{j.type}}</span>
+                    <span class="price">{{j.prix}}€</span>
+                    <a class="btn btn-info pull-right" href="#"><i class="icon-shopping-cart"></i>Acheter</a>
+                </div>               
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endblock %} 

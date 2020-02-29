@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Portabilité {% endblock %}
+{% block style %} <link href="css/form.css" rel="stylesheet"> {% endblock %}
+{% block contenu %} 
+     {% if form.portabilite is defined %} 
+        {% if form.portabilite != null %}
+            <form class="form" action="index.php?page=portabilite-modif" method="post" enctype="application/x-www-form-urlencoded">
+                <h1 class="h3 mb-3 font-weight-normal">Modifier une portabilité</h1>
+                <input type="hidden" class="form-control" name="id" value="{{ form.portabilite.id }}"/>
+                <label for="type" class="sr-only">Type:</label>
+                <input type="textfield" class="form-control" name="type" value="{{ form.portabilite.type }}"/>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>
+            </form> 
+        {% else %} 
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=portabilite">Retourner sur la liste des portabilitées</a></h1>
+        {% endif %} 
+    {% endif %}    
+    {% if form.conclure is defined %}
+        {% if form.conclure == true %}
+             <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=portabilite">Retourner sur la liste des portabilitées</a></h1>
+        {% else %}    
+             <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=portabilite">Retourner sur la liste des portabilitées</a></h1>
+        {% endif %}
+    {% endif %}    
+    
+    
+    
+    
+{% endblock %}

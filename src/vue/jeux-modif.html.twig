@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Jeux {% endblock %}
+{% block style %} <link href="css/form.css" rel="stylesheet"> {% endblock %}
+{% block contenu %} 
+    {% if form.jeux is defined %} 
+        {% if form.jeux != null %}
+            <form class="form" action="index.php?page=jeux-modif" method="post" enctype="multipart/form-data">
+                <h1 class="h3 mb-3 font-weight-normal">Modifier un jeu: </h1>
+                {% if form.media is not empty %}
+                    <p align='center' class="imgcenter"><img src="images/jeux/{{form.media.nom}}" alt="image du jeu"/></p>  
+                    <input type="hidden" class="form-control" name="idmedia" value="{{ form.media.id }}"/>
+                {% endif %}
+                <input type="hidden" class="form-control" name="id" value="{{ form.jeux.id }}"/>
+                <label for="designation" class="sr-only">Désignation:</label>
+                <input type="textfield" class="form-control" name="designation" value="{{ form.jeux.designation }}"/>
+                <label for="description" class="sr-only">Description:</label>
+                <input type="textfield" class="form-control" name="description" value="{{ form.jeux.description }}"/>
+                <label for="prix" class="sr-only">Prix:</label>
+                <input type="textfield" class="form-control" name="prix" value="{{ form.jeux.prix }}"/>
+                <select class="form-control"  name="genre">
+                    {% for g in form.genre %}
+                        {% if g.id == form.genre.id %}
+                            <option value="{{g.id}}">{{g.libelle}}</option>
+                        {% else %}
+                            <option value="{{g.id}}">{{g.libelle}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select class="form-control"  name="genre2">
+                    {% for g in form.genre %}
+                        {% if g.id == form.genre.id %}
+                            <option value="{{g.id}}">{{g.libelle}}</option>
+                        {% else %}
+                            <option value="{{g.id}}">{{g.libelle}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <select class="form-control"  name="portable">
+                    {% for p in form.portable %}
+                        <option value="{{p.id}}">{{p.type}}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-control"  name="portable2">
+                    {% for p in form.portable %}
+                        {% if p.id == form.portable.id %}
+                            <option value="{{p.id}}">{{p.type}}</option>
+                        {% else %}
+                            <option value="{{p.id}}">{{p.type}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <label  for="photo"  class="sr-only">Photo:</label>
+                <input  type="file"   name="photo"  id="photo" class="form-control"/>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>
+            </form> 
+        {% else %} 
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=jeux">Retourner sur la liste des jeux</a></h1>
+        {% endif %} 
+    {% endif %}    
+    {% if form.conclure is defined %}
+        {% if form.conclure == true %}
+             <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=jeux">Retourner sur la liste des jeux</a></h1>
+        {% else %}    
+             <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=jeux">Retourner sur la liste des jeux</a></h1>
+        {% endif %}
+    {% endif %} 
+    
+    
+    
+    
+{% endblock %}

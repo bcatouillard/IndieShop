@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block title %} {{ parent() }} Modification du Client {% endblock %}
+{% block style %} <link href="css/form.css" rel="stylesheet"> {% endblock %}
+{% block contenu %} 
+    {% if form.client is defined %} 
+        {% if form.client != null %}
+            <form class="form" action="index.php?page=client-modif" method="post" enctype="application/x-www-form-urlencoded">
+                <h1 class="h3 mb-3 font-weight-normal">Modifier un client</h1>
+                <label for="email" class="sr-only">Email:</label>
+                <input type="email" class="form-control" name="email" value="{{ form.client.email }}"/>
+                <label for="mdp" class="sr-only">Mot de passe:</label>
+                <input type="password" id="mdp" name="mdp" class="form-control" placeholder="Mot de passe:">
+                <label for="mdp2" class="sr-only">Confirmation mot de passe:</label>
+                <input type="password" id="mdp2" name="mdp2" class="form-control" placeholder="Confirmation mot de passe">
+                <label for="pseudo" class="sr-only">Pseudo:</label>
+                <input type="pseudo" id="pseudo" name="pseudo" class="form-control" value="{{form.client.pseudo}}" placeholder="Pseudo:">
+                <select class="form-control"  name="role">
+                    {% for r in form.roles %}
+                        {% if r.id==form.client.idRole %}
+                            <option value="{{ r.id }}" selected>{{ r.libelle }}</option>
+                        {% else %}
+                            <option value="{{ r.id }}">{{ r.libelle }}</option>   
+                        {% endif %}    
+                    {% endfor %}   
+                </select>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Modifier</button>
+            </form> 
+        {% else %} 
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=client">Retourner sur la liste des clients</a></h1>
+        {% endif %} 
+    {% endif %}    
+    {% if form.conclure is defined %}
+        {% if form.conclure == true %}
+             <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=client">Retourner sur la liste des clients</a></h1>
+        {% else %}    
+             <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+             <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=client">Retourner sur la liste des clients</a></h1>
+        {% endif %}
+    {% endif %} 
+{% endblock %}     
